@@ -1,0 +1,939 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cat.png">
+  <link rel="icon" href="/img/cat.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="vexento">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="C (构造) D (贪心、multiset) E (树状数组优化dp)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 857 (Div. 2) C - E">
+<meta property="og:url" content="http://example.com/2023/03/14/cf_1802_C_E/index.html">
+<meta property="og:site_name" content="vexento">
+<meta property="og:description" content="C (构造) D (贪心、multiset) E (树状数组优化dp)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/cf_1802.png">
+<meta property="article:published_time" content="2023-03-14T01:17:00.000Z">
+<meta property="article:modified_time" content="2023-03-14T01:22:25.535Z">
+<meta property="article:author" content="vexento">
+<meta property="article:tag" content="codeforce, cf, C, D, E, Maximum Subarray, dp, DP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/cf_1802.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Codeforces Round 857 (Div. 2) C - E-vexento</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":50,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>vexento</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/cf_1802.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Codeforces Round 857 (Div. 2) C - E"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-14 09:17" pubdate>
+          March 14, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Codeforces Round 857 (Div. 2) C - E</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>C (构造) D (贪心、multiset) E (树状数组优化dp)</p>
+<span id="more"></span>
+<h2 id="链接">链接</h2>
+<p><a
+target="_blank" rel="noopener" href="https://codeforces.com/contest/1802">https://codeforces.com/contest/1802</a></p>
+<h2 id="c-构造">C (构造)</h2>
+<h3 id="题意">题意</h3>
+<p>构造一个 <span class="math inline">\(n \times m\)</span>
+的矩阵，使得每一个 <span class="math inline">\(2 \times 2\)</span>
+的子矩阵满足： <span class="math display">\[
+\begin{matrix} A_{11} \oplus A_{12} \oplus A_{21} \oplus
+A_{22}=A_{33}\oplus A_{34} \oplus A_{43} \oplus A_{44}
+\\A_{13} \oplus A_{14} \oplus A_{23} \oplus A_{24}=A_{31}\oplus A_{32}
+\oplus A_{41} \oplus A_{42}
+\end{matrix}
+\]</span></p>
+<h3 id="题解">题解</h3>
+<p>通过观察样例，可以猜想每一个子矩阵的异或和是一个常数。（待证明）<br />
+因此，我们可以随机化矩阵的第一行和第一列，并设定一个常数 <span
+class="math inline">\(C\)</span>
+作为每个子矩阵的异或和。对于一个子矩阵，若已知三个数的值 <span
+class="math inline">\(A_{1}, A_{2}, A_{3}\)</span>，则第四个值 <span
+class="math inline">\(A_{4}=C \oplus A_{1} \oplus A_{2} \oplus
+A_{3}\)</span>。</p>
+<h3 id="python-代码">python 代码</h3>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> random
+T = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())
+mod = (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">63</span>) - <span class="hljs-number">1</span>
+f = [[<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">200</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">200</span>)]
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">200</span>):
+    f[i][<span class="hljs-number">0</span>] = random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100000000000000012</span>)
+    f[<span class="hljs-number">0</span>][i] = random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100000000000000012</span>)
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">200</span>):
+    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">200</span>):
+        f[i][j] = mod ^ f[i - <span class="hljs-number">1</span>][j] ^ f[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] ^ f[i][j - <span class="hljs-number">1</span>]
+<span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(T):
+    n, m = [<span class="hljs-built_in">int</span>(_) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">input</span>().split()]
+    <span class="hljs-built_in">print</span>(n*m)
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m):
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;%d &#x27;</span> % f[i][j], end=<span class="hljs-string">&#x27;&#x27;</span>)
+        <span class="hljs-built_in">print</span>()</code></pre></div>
+<h2 id="d-贪心multiset">D (贪心、multiset)</h2>
+<h3 id="题意-1">题意</h3>
+<p>给出两个数组 <span class="math inline">\(a, b\)</span>，操作 <span
+class="math inline">\(n\)</span> 次，对于第 <span
+class="math inline">\(i\)</span> 次，每次只能从 <span
+class="math inline">\(a_{i}、b_{i}\)</span> 中选出一个，记从 <span
+class="math inline">\(a\)</span> 随选出的数列为 <span
+class="math inline">\(a_{choose}\)</span>，从 <span
+class="math inline">\(b\)</span> 中选出的数列为 <span
+class="math inline">\(b_{choose}\)</span>，目标是最小化 $| (a_{choose})
+- (b_{choose}) | $。</p>
+<h3 id="题解-1">题解</h3>
+<p>将 <span class="math inline">\(a, b\)</span> 一起按照 <span
+class="math inline">\(a\)</span> 从大到小排序，从前往后遍历 <span
+class="math inline">\(a\)</span>，对于 <span
+class="math inline">\(a_{i}\)</span>，将其作为从 <span
+class="math inline">\(a\)</span> 中选出的最大值。<br />
+由于 <span class="math inline">\(\forall j \in [1,i-1], a_{j} &lt;
+a_{i}\)</span>，因此，<span class="math inline">\(i\)</span> 前面的
+<span class="math inline">\(a\)</span> 一定不选，<span
+class="math inline">\(i\)</span> 前面的 <span
+class="math inline">\(b\)</span> 一定要选；<span
+class="math inline">\(i\)</span> 后面的 <span
+class="math inline">\(b\)</span> 可选可不选。<br />
+记 <span class="math inline">\(mxb = \max(b_{j}, j \in [1,i-1])\)</span>
+，则只需要在 <span class="math inline">\(i\)</span> 后面的 <span
+class="math inline">\(b\)</span> 中找到和 <span
+class="math inline">\(a_{i}\)</span> 最相近的且 <span
+class="math inline">\(&gt; mxb\)</span> 的数 <span
+class="math inline">\(b_{k}\)</span> 即可用 <span
+class="math inline">\(\left | a_{i} - b_{k} \right |\)</span>
+更新答案；如果没有找到，则用 <span class="math inline">\(\left | a_{i} -
+mxb \right |\)</span> 更新答案。<br />
+可用 <span class="math inline">\(muliset\)</span> 维护，<span
+class="math inline">\(lower_bound\)</span> 用于寻找最相近的数。<br />
+时间复杂度 <span class="math inline">\(O(nlogn)\)</span></p>
+<h3 id="c-代码">c++ 代码</h3>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;set&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> _for( i, L, R ) for ( int i = L; i &lt;= R; ++i )</span>
+
+using namespace <span class="hljs-built_in">std</span>;
+
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">5e5</span> + <span class="hljs-number">5</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> &#123;</span>
+public:
+	<span class="hljs-type">int</span> a, b;
+	<span class="hljs-type">bool</span> operator&lt;( <span class="hljs-type">const</span> Node &amp; o ) <span class="hljs-type">const</span>
+	&#123;
+		<span class="hljs-keyword">return</span>(a &gt; o.a);
+	&#125;
+&#125; e[N];
+<span class="hljs-type">int</span> n;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">solve</span><span class="hljs-params">()</span>
+&#123;
+	<span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d&quot;</span>, &amp;n );
+	<span class="hljs-built_in">multiset</span>&lt;<span class="hljs-type">int</span>&gt; s;
+	_for( i, <span class="hljs-number">1</span>, n ) <span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d%d&quot;</span>, &amp;e[i].a, &amp;e[i].b ), s.insert( e[i].b );
+	sort( e + <span class="hljs-number">1</span>, e + n + <span class="hljs-number">1</span> );
+	<span class="hljs-type">int</span> res = <span class="hljs-number">1e9</span>, mx = <span class="hljs-number">-1e9</span>;
+	_for( i, <span class="hljs-number">1</span>, n )
+	&#123;
+		s.erase( s.find( e[i].b ) );
+		<span class="hljs-keyword">auto</span> it = s.lower_bound( e[i].a );
+		<span class="hljs-keyword">if</span> ( it != s.end() and * it &gt; mx )
+			res = min( res, <span class="hljs-built_in">abs</span>( e[i].a - *it ) );
+		<span class="hljs-keyword">if</span> ( it != s.begin() and * prev( it ) &gt; mx )
+			res = min( res, <span class="hljs-built_in">abs</span>( e[i].a - *prev( it ) ) );
+		res	= min( res, <span class="hljs-built_in">abs</span>( e[i].a - mx ) );
+		mx	= max( e[i].b, mx );
+	&#125;
+	<span class="hljs-built_in">printf</span>( <span class="hljs-string">&quot;%d\n&quot;</span>, res );
+&#125;
+
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+	<span class="hljs-type">int</span> T;
+	<span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d&quot;</span>, &amp;T );
+	<span class="hljs-keyword">while</span> ( T-- )
+		solve();
+	<span class="hljs-keyword">return</span>(<span class="hljs-number">0</span>);
+&#125;</code></pre></div>
+<h2 id="e-树状数组优化dp">E (树状数组优化dp)</h2>
+<h3 id="题意-2">题意</h3>
+<p>给出 <span class="math inline">\(n\)</span> 个数组，每个数组有 <span
+class="math inline">\(k_{i}\)</span>
+个数，找到一直数组拼接方式，使得拼接后的数组 <span
+class="math inline">\(b\)</span> 中满足 <span
+class="math inline">\(\forall j \in [1, i-1], b_{i} &gt; b_{j}\)</span>
+（条件1）的数最多。</p>
+<h3 id="题解-2">题解</h3>
+<p>考虑dp。记 <span class="math display">\[
+f[i]：前 i 个数组拼接而成的最大答案
+\]</span></p>
+<ul>
+<li>由于一个数组中可能对答案产生贡献的只有在本数组中满足条件1的数，因此在读入时即可使数组单调递增<br />
+</li>
+<li>将 <span class="math inline">\(n\)</span>
+个数组按照最后一个元素从小到大排序，这样在更新 <span
+class="math inline">\(f[i]\)</span>
+时，前面的状态一定已经被更新完了<br />
+</li>
+<li>对于 <span class="math inline">\(f[i]\)</span>，其中的某一个数 <span
+class="math inline">\(a_{i, j}\)</span>，贡献来自两部分
+<ul>
+<li>由于 <span class="math inline">\(\forall p \in [j+1, k_{i}], a_{i,
+p} &gt; a_{i, j}\)</span>，因此贡献为 <span
+class="math inline">\(k_{i}-j\)</span></li>
+<li>对于最大值小于 <span class="math inline">\(a_{i, j}\)</span> 的数组
+<span class="math inline">\(a_{s}\)</span>，其贡献为 <span
+class="math inline">\(\max(f[s])\)</span></li>
+</ul></li>
+</ul>
+<p>因此，状态转移方程为<br />
+<span class="math display">\[
+f[i] = \max(\max(f[s]) + k_{i} - j), s = \{s| \max(a_{s}) &lt; a_{i,
+j}\}
+\]</span> 其中，<span class="math inline">\(\max(f[s])\)</span>
+可用树状数组维护。<br />
+时间复杂度 <span class="math inline">\(O(nklogn)\)</span></p>
+<h3 id="c-代码-1">c++ 代码</h3>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> GCC optimize(1)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">pragma</span> GCC optimize(2)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">pragma</span> GCC optimize(3,<span class="hljs-string">&quot;Ofast&quot;</span>,<span class="hljs-string">&quot;inline&quot;</span>)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> _for( i, L, R ) for ( int i = L; i &lt;= R; ++i )</span>
+
+using namespace <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lowbit</span><span class="hljs-params">( <span class="hljs-type">int</span> x )</span>
+&#123;
+	<span class="hljs-keyword">return</span>(x &amp; - x);
+&#125;
+
+
+<span class="hljs-type">const</span> <span class="hljs-type">int</span>	N = <span class="hljs-number">2e5</span> + <span class="hljs-number">5</span>;
+<span class="hljs-type">int</span>		n, tr[N], f[N], mxv;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> &#123;</span>
+public:
+	<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; v;
+	<span class="hljs-type">bool</span> operator&lt;( <span class="hljs-type">const</span> Node &amp; o ) <span class="hljs-type">const</span>
+	&#123;
+		<span class="hljs-keyword">return</span>(v.back() &lt; o.v.back() );
+	&#125;
+&#125; a[N];
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">modify</span><span class="hljs-params">( <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y )</span>
+&#123;
+	<span class="hljs-keyword">for</span> ( <span class="hljs-type">int</span> i = x; i &lt;= mxv; i += lowbit( i ) )
+		tr[i] = max( tr[i], y );
+&#125;
+
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">( <span class="hljs-type">int</span> x )</span>
+&#123;
+	<span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span> ( <span class="hljs-type">int</span> i = x; i; i -= lowbit( i ) )
+		res = max( res, tr[i] );
+	<span class="hljs-keyword">return</span>(res);
+&#125;
+
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">( <span class="hljs-type">int</span> x )</span>
+&#123;
+	<span class="hljs-keyword">for</span> ( <span class="hljs-type">int</span> i = x; i &lt;= mxv; i += lowbit( i ) )
+		tr[i] = <span class="hljs-number">0</span>;
+&#125;
+
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">solve</span><span class="hljs-params">()</span>
+&#123;
+	<span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d&quot;</span>, &amp;n );
+	mxv = <span class="hljs-number">0</span>;
+	_for( i, <span class="hljs-number">1</span>, n )
+	&#123;
+		<span class="hljs-type">int</span> m;
+		<span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d&quot;</span>, &amp;m );
+		<span class="hljs-keyword">while</span> ( m-- )
+		&#123;
+			<span class="hljs-type">int</span> x;
+			<span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d&quot;</span>, &amp;x );
+			<span class="hljs-keyword">if</span> ( a[i].v.empty() or a[i].v.back() &lt; x )
+				a[i].v.push_back( x ), mxv = max( mxv, x );
+		&#125;
+	&#125;
+	sort( a + <span class="hljs-number">1</span>, a + <span class="hljs-number">1</span> + n );
+	<span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;
+	_for( i, <span class="hljs-number">1</span>, n )
+	&#123;
+		<span class="hljs-type">int</span> k = a[i].v.size(), cnt = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span> ( <span class="hljs-type">int</span> j = k - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; --j )
+		&#123;
+			cnt++;
+			f[i] = max( f[i], cnt + query( a[i].v[j] - <span class="hljs-number">1</span> ) );
+		&#125;
+		modify( a[i].v.back(), f[i] );
+		res = max( res, f[i] );
+	&#125;
+	_for( i, <span class="hljs-number">1</span>, n ) clear( a[i].v.back() ), a[i].v.clear(), f[i] = <span class="hljs-number">0</span>;
+	<span class="hljs-built_in">printf</span>( <span class="hljs-string">&quot;%d\n&quot;</span>, res );
+&#125;
+
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+	<span class="hljs-type">int</span> T = <span class="hljs-number">1</span>;
+	<span class="hljs-built_in">scanf</span>( <span class="hljs-string">&quot;%d&quot;</span>, &amp;T );
+	<span class="hljs-keyword">while</span> ( T-- )
+		solve();
+	<span class="hljs-keyword">return</span>(<span class="hljs-number">0</span>);
+&#125;</code></pre></div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/codeforce-cf-C-D-E-Maximum-Subarray-dp-DP/">#codeforce, cf, C, D, E, Maximum Subarray, dp, DP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Codeforces Round 857 (Div. 2) C - E</div>
+      <div>http://example.com/2023/03/14/cf_1802_C_E/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>vexento</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 14, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/12/cf_1796_D/" title="Educational Codeforces Round 144 (Rated for Div. 2) D. Maximum Subarray (dp)">
+                        <span class="hidden-mobile">Educational Codeforces Round 144 (Rated for Div. 2) D. Maximum Subarray (dp)</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
